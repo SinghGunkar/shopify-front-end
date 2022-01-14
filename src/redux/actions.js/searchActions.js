@@ -2,9 +2,9 @@ import nasaImageAPI from "../../apis/nasaAPI"
 
 export const fetchSearchResults = payload => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
-        const fireStore = getFirestore()
-        const state = getState()
-        const uid = state.firebase.auth.uid
+        // const fireStore = getFirestore()
+        // const state = getState()
+        // const uid = state.firebase.auth.uid
 
         console.log("Searching for: " + payload)
         nasaImageAPI
@@ -15,10 +15,18 @@ export const fetchSearchResults = payload => {
                 }
             })
             .then(response => {
-                console.log(response.data)
-                return dispatch({
-                    type: "SEARCH_SUCCESSFUL",
-                    payload: { fetchedResults: response.data, status: "idle" }
+                // console.log("Fetched results: ", response.data)
+
+                return new Promise(function (resolve, reject) {
+                    setTimeout(() => {
+                        return dispatch({
+                            type: "SEARCH_SUCCESSFUL",
+                            payload: {
+                                fetchedResults: response.data,
+                                status: "idle"
+                            }
+                        })
+                    }, 1000)
                 })
             })
 
