@@ -1,12 +1,12 @@
 import { combineReducers } from "redux"
 import authReducer from "./authReducer"
-import testCasesReducer from "./testCasesReducer"
+import searchResultsReducer from "./searchReducer"
 import { firestoreReducer } from "redux-firestore"
 import { firebaseReducer } from "react-redux-firebase"
 
 export const rootReducer = combineReducers({
-    auth: authReducer,
-    testCases: testCasesReducer,
+    authErrors: authReducer,
     firestore: firestoreReducer,
-    firebase: firebaseReducer
+    firebase: firebaseReducer,
+    searchResults: searchResultsReducer
 })

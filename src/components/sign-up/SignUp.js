@@ -79,7 +79,7 @@ const SignUp = ({ signUpUserWithUserCredentials, signUpError }) => {
 
 const mapStateToProps = state => {
     return {
-        signUpError: state.auth.signUpError
+        signUpError: state.authErrors.signUpError
     }
 }
 

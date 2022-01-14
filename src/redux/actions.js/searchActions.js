@@ -1,6 +1,6 @@
 import nasaImageAPI from "../../apis/nasaAPI"
 
-export const searchForTerm = payload => {
+export const fetchSearchResults = payload => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const fireStore = getFirestore()
         const state = getState()
@@ -17,23 +17,25 @@ export const searchForTerm = payload => {
             .then(response => {
                 console.log(response.data)
                 return dispatch({
-                    type: "VALIDATE_TESTCASE_SUCCESS"
+                    type: "SEARCH_SUCCESSFUL",
+                    payload: { fetchedResults: response.data, status: "idle" }
                 })
             })
 
             .catch(err => {
                 console.log(err)
                 return dispatch({
-                    type: "VALIDATE_TESTCASE_ERROR"
+                    type: "SEARCH_ERROR",
+                    payload: { error: err, status: "idle" }
                 })
             })
     }
 }
 
-export const setIsFetchingState = () => {
+export const setIsSearchingState = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         return dispatch({
-            type: "START_FETCHING_VALIDATION_RESULTS",
+            type: "FETCHING_SEARCH_RESULTS",
             payload: "fetching"
         })
     }

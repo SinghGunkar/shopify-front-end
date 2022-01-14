@@ -1,15 +1,17 @@
 import React, { useState } from "react"
 import { connect } from "react-redux"
 import "./ImageSearchForm.scss"
+
 import {
-    validateTestCase,
-    setIsFetchingState
-} from "../../redux/actions.js/testCaseActions"
+    fetchSearchResults,
+    setIsSearchingState
+} from "../../redux/actions.js/searchActions"
+
 import FormInput from "../form-input/FormInput"
 import Button from "../button/Button"
 
 const ImageSearchForm = ({
-    fetchValidationResults,
+    fetchResults,
     fetchingStatus,
     setAPIRequestStatusToFetching
 }) => {
@@ -22,7 +24,7 @@ const ImageSearchForm = ({
     const handleSubmit = e => {
         e.preventDefault()
         setAPIRequestStatusToFetching()
-        fetchValidationResults(userInput)
+        fetchResults(userInput)
         setUserInput("")
     }
 
@@ -59,14 +61,15 @@ const ImageSearchForm = ({
 
 const mapStateToProps = state => {
     return {
-        fetchingStatus: state.testCases.fetchingState
+        fetchingStatus: state.searchResults.nasaAPIState
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchValidationResults: userInput => dispatch(validateTestCase(userInput)),
-        setAPIRequestStatusToFetching: () => dispatch(setIsFetchingState())
+        fetchResults: userInput => dispatch(fetchSearchResults(userInput)),
+        setAPIRequestStatusToFetching: () =>
+            dispatch(setIsSearchingState("fetching"))
     }
 }
 

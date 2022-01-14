@@ -62,7 +62,7 @@ const SignIn = ({ signIn, signInError, signInWithGoogle }) => {
 
 const mapStateToProps = state => {
     return {
-        signInError: state.auth.signInError
+        signInError: state.authErrors.signInError
     }
 }
 
