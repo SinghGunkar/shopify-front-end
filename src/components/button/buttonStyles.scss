@@ -30,4 +30,27 @@
             border: 1px solid #4285f4;
         }
     }
+
+    &.like-button {
+        background-color: black;
+        color: white;
+
+        &:hover {
+            background-color: white;
+            color: rgb(42, 190, 99);
+            border: 1px solid rgb(42, 190, 99);
+        }
+    }
+
+    &.dislike-button {
+        background-color: black;
+        color: white;
+        margin-left: 15px;
+
+        &:hover {
+            background-color: white;
+            color: red;
+            border: 1px solid red;
+        }
+    }
 }

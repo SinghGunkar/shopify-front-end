@@ -2,12 +2,18 @@ import React from "react"
 
 import "./buttonStyles.scss"
 
-const Button = ({ children, isGoogleSignIn, ...otherProps }) => {
+const Button = ({
+    children,
+    isGoogleSignIn,
+    isDislikeButton,
+    isLikeButton,
+    ...otherProps
+}) => {
     return (
         <button
-            className={`${
-                isGoogleSignIn ? "google-sign-in" : ""
-            } button`}
+            className={`${isGoogleSignIn ? "google-sign-in" : ""} ${
+                isDislikeButton ? "dislike-button" : ""
+            } ${isLikeButton ? "like-button" : ""} button`}
             {...otherProps}
         >
             {children}
