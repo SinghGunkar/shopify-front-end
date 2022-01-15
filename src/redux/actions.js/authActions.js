@@ -12,7 +12,7 @@ export const signUpUser = payload => {
                 return firestore.collection("users").doc(response.user.uid).set({
                     name,
                     email,
-                    FoundTestCases: []
+                    likedImages: []
                 })
             })
             .then(() => {
@@ -59,6 +59,9 @@ export const signOut = () => {
 export const signInWithGoogle = () => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         const firebase = getFirebase()
+
+        console.log(firebase.auth())
+
         firebase
             .login({
                 provider: "google",

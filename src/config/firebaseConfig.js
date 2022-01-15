@@ -3,13 +3,13 @@ import "firebase/compat/auth"
 import "firebase/compat/firestore"
 
 export const firebaseConfig = {
-    apiKey: "AIzaSyDLKoqWJQe1zdbmCPfU3OfweELPpbdC6hU",
-    authDomain: "shopify-frontend-challen-ef8f5.firebaseapp.com",
-    projectId: "shopify-frontend-challen-ef8f5",
-    storageBucket: "shopify-frontend-challen-ef8f5.appspot.com",
-    messagingSenderId: "10700909313",
-    appId: "1:10700909313:web:6867ebffb96d34710bc900",
-    measurementId: "G-KQR8C7DSQH",
+    apiKey: "AIzaSyB2BvzLUjDOoigi3qH6rfIIsQSVpeDSMhY",
+    authDomain: "shopify-front-end-challenge.firebaseapp.com",
+    projectId: "shopify-front-end-challenge",
+    storageBucket: "shopify-front-end-challenge.appspot.com",
+    messagingSenderId: "356264499345",
+    appId: "1:356264499345:web:ed57478a2c3862d088c730",
+    measurementId: "G-PJQQWTXZ1G",
     userProfile: "users",
     useFirestoreForProfile: true
 }
