@@ -1,4 +1,9 @@
 .found-test-cases-container {
+    .search-results-container {
+        height: 85vh;
+        overflow-y: scroll;
+    }
+
     li {
         text-align: right;
         list-style-type: square;

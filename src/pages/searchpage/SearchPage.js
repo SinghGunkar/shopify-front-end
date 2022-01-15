@@ -2,7 +2,7 @@ import React from "react"
 import "./searchPageStyles.scss"
 import Instructions from "../../components/instructions.js/Instructions"
 import ImageSearchForm from "../../components/image-search-form/ImageSearchForm"
-import SearchResults from "../../components/searchResults/SearchResults"
+import SearchResults from "../../components/search-results/SearchResults"
 import { connect } from "react-redux"
 import { Redirect } from "react-router-dom"
 
