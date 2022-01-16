@@ -4,7 +4,7 @@ Here are screenshots of the project
 
 ## Home
 
-![img1](filesForReadmd/homepage.png)
+![img1](filesForReadmd/intropage.png)
 
 ## SignIn/SignUp
 
