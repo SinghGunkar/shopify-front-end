@@ -4,20 +4,27 @@ export const likePhoto = payload => {
         const firebase = getFirebase()
         const state = getState()
         const uid = state.firebase.auth.uid
+        const likedImagesArr = state.firebase.profile.likedImages
+        const isUserLikedNewImage =
+            likedImagesArr.filter(img => img.imageLink === payload.imageLink)
+                .length === 0
 
-        fireStore
-            .update(
-                { collection: "users", doc: uid },
-                {
-                    likedImages: [payload, payload]
-                }
-            )
-            .then(response => {
-                console.log("Successfully added image")
-            })
-            .catch(err => {
-                console.log(err)
-            })
+        if (isUserLikedNewImage) {
+            likedImagesArr.push(payload)
+            fireStore
+                .update(
+                    { collection: "users", doc: uid },
+                    {
+                        likedImages: likedImagesArr
+                    }
+                )
+                .then(response => {
+                    dispatch({ type: "LIKE_SUCCESS", payload: "idle" })
+                })
+                .catch(err => {
+                    console.log(err)
+                })
+        }
     }
 }
 

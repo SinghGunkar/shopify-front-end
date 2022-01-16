@@ -16,8 +16,12 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
                 <div key={index} className="search-result-wrapper">
                     <h3>{title}</h3>
                     <h5>{"Date created: " + dateCreated}</h5>
+
+                    <br />
+                    <img src={imageLink} alt="new" />
+                    <br />
                     <Button
-                        onClick={() => likeImage(imageLink)}
+                        onClick={() => likeImage({ title, dateCreated, imageLink })}
                         isLikeButton={true}
                         type="submit"
                     >
@@ -30,9 +34,6 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
                     >
                         Unlike
                     </Button>
-                    <br />
-                    <img src={imageLink} alt="new" />
-                    <br />
                 </div>
             )
         })

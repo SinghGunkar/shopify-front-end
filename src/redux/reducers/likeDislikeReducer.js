@@ -1,5 +1,6 @@
 const initialState = {
-    likedPhotos: []
+    likedPhotos: [],
+    status: "idle"
 }
 
 const likeDislikePhotoReducer = (state = initialState, action) => {
@@ -12,6 +13,9 @@ const likeDislikePhotoReducer = (state = initialState, action) => {
             return { ...state }
         case "LIKE_DISLIKE_ERROR":
             return { ...state }
+        case "LIKE_SUCCESS":
+            console.log("Successfully liked image")
+            return { ...state, status: action.payload }
         default:
             return state
     }
