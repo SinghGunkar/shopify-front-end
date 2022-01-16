@@ -15,6 +15,16 @@ const Header = ({ isUserSignedIn, logOut, isAuthStateLoaded }) => {
             <div className="navigation-links-wrapper">
                 <div>
                     {isUserSignedIn && isAuthStateLoaded ? (
+                        <Link className="link" to="/liked">
+                            LIKES
+                        </Link>
+                    ) : (
+                        ""
+                    )}
+                </div>
+
+                <div>
+                    {isUserSignedIn && isAuthStateLoaded ? (
                         <Link className="link" to="/search">
                             SEARCH
                         </Link>
