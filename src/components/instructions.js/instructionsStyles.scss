@@ -3,3 +3,9 @@
         list-style-type: square;
     }
 }
+
+@media (max-width: 600px) {
+    .instructions-container > li {
+        font-size: 12px;
+    }
+}

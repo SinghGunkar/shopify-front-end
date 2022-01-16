@@ -29,8 +29,6 @@ const SearchDataList = ({
         )
     }
 
-    console.log(isLikeDislikeStatus)
-
     if (searchDataArray.length > 0) {
         return searchDataArray.map((result, index) => {
             const { data, links } = result
