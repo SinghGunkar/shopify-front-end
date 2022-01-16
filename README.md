@@ -1,6 +1,7 @@
 ## Intro
 
-Here are screenshots of the project
+* Link to the website can be found [here](https://shopify-front-end-challenge.web.app/)
+* Here are screenshots of the project
 
 ## Home
 
