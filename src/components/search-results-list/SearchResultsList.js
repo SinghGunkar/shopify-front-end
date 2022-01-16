@@ -19,8 +19,6 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
         )
     }
 
-    console.log(likedImages)
-
     if (searchDataArray.length > 0) {
         return searchDataArray.map((result, index) => {
             const { data, links } = result

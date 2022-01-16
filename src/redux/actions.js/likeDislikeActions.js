@@ -6,7 +6,7 @@ export const likePhoto = payload => {
         const uid = state.firebase.auth.uid
         const likedImagesArr = state.firebase.profile.likedImages
         const isUserLikedNewImage =
-            likedImagesArr.filter(img => img.imageLink === payload.imageLink)
+            likedImagesArr?.filter(img => img.imageLink === payload.imageLink)
                 .length === 0
 
         if (isUserLikedNewImage) {

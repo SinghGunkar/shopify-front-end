@@ -26,7 +26,7 @@ const SignIn = ({ signIn, signInError, signInWithGoogle }) => {
         <div className="sign-in-container">
             <span className="sign-in-title">Have an account?</span>
             <span className="sign-in-sub-title">
-                Sign in below with your credentials or use Google!
+                Sign in below with your credentials
             </span>
 
             <form className="sign-in-form" onSubmit={handleSubmit}>
@@ -48,9 +48,6 @@ const SignIn = ({ signIn, signInError, signInWithGoogle }) => {
                 />
 
                 <Button type="submit"> Sign in </Button>
-                <Button onClick={signInWithGoogle} isGoogleSignIn={true}>
-                    Sign in with Google
-                </Button>
 
                 <h5 className="sign-in-error">
                     {signInError ? `${signInError}` : ""}
