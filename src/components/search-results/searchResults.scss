@@ -10,4 +10,11 @@
         direction: rtl;
         list-style-position: inside;
     }
+
+    @media (max-width: 600px) {
+        .search-results-container {
+            height: 100%;
+            overflow-y: scroll;
+        }
+    }
 }

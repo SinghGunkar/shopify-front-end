@@ -11,7 +11,7 @@ exports.onUserCreated = functions.auth.user().onCreate(user => {
         .firestore()
         .collection(`users`)
         .doc(uid)
-        .set({ userEmail: email, likedImages: [{}], urlsOfLikedImages: [] })
+        .set({ email: email, likedImages: [] })
         .then(() => {
             console.log("Cloud function ran on user created")
         })

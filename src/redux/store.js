@@ -10,7 +10,12 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 export const store = createStore(
     rootReducer,
     composeEnhancers(
-        applyMiddleware(thunk.withExtraArgument({ getFirestore, getFirebase })),
+        applyMiddleware(
+            thunk.withExtraArgument({
+                getFirestore,
+                getFirebase
+            })
+        ),
         reduxFirestore(firebaseConfig)
     )
 )

@@ -19,3 +19,21 @@
         }
     }
 }
+
+@media (max-width: 600px) {
+    .challenge-page-container {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+
+        .left-column {
+            width: 100%;
+            margin-bottom: 15px;
+        }
+
+        .right-column {
+            width: 100%;
+            margin-left: 0px;
+        }
+    }
+}
