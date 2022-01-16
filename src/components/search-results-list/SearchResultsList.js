@@ -1,10 +1,17 @@
 import React from "react"
-import { connect } from "react-redux"
+import { connect, useSelector } from "react-redux"
 import { dislikePhoto, likePhoto } from "../../redux/actions.js/likeDislikeActions"
+import { useFirestoreConnect, isLoaded } from "react-redux-firebase"
 import "./searchResultsList.scss"
 import Button from "../button/Button"
 
 const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
+    const uid = useSelector(state => state.firebase.auth.uid)
+    useFirestoreConnect([{ collection: "users", doc: uid }])
+    const likedImages = useSelector(
+        ({ firestore: { data } }) => data.users && data.users[uid]?.likedImages
+    )
+
     if (searchDataArray.length > 0) {
         return searchDataArray.map((result, index) => {
             const { data, links } = result

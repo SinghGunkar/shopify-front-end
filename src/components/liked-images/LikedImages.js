@@ -1,10 +1,11 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useSelector, connect } from "react-redux"
 import "./likedImages.scss"
 import { useFirestoreConnect, isLoaded } from "react-redux-firebase"
 import Button from "../button/Button"
+import { dislikePhoto } from "../../redux/actions.js/likeDislikeActions"
 
-const LikedImages = () => {
+const LikedImages = ({ dislikeImage }) => {
     const uid = useSelector(state => state.firebase.auth.uid)
     useFirestoreConnect([{ collection: "users", doc: uid }])
     const likedImages = useSelector(
@@ -31,7 +32,14 @@ const LikedImages = () => {
                             <div className="info">
                                 <h4>{image.title}</h4>
                                 <h4>{`Date created: ${image.dateCreated}`}</h4>
-                                <Button />
+
+                                <Button
+                                    onClick={() => dislikeImage(image.imageLink)}
+                                    isDislikeButton={true}
+                                    type="submit"
+                                >
+                                    UNLIKE
+                                </Button>
                             </div>
                         </div>
                     )
@@ -41,4 +49,10 @@ const LikedImages = () => {
     )
 }
 
-export default LikedImages
+const mapDispatchToProps = dispatch => {
+    return {
+        dislikeImage: url => dispatch(dislikePhoto(url))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(LikedImages)
