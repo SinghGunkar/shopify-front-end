@@ -16,6 +16,9 @@ const likeDislikePhotoReducer = (state = initialState, action) => {
         case "LIKE_SUCCESS":
             console.log("Successfully liked image")
             return { ...state, status: action.payload }
+        case "DISLIKE_SUCCESS":
+            console.log("Successfully unliked image")
+            return { ...state, status: action.payload }
         default:
             return state
     }

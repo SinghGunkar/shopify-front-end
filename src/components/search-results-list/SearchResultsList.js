@@ -12,6 +12,15 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
         ({ firestore: { data } }) => data.users && data.users[uid]?.likedImages
     )
 
+    const isImageAlreadyLiked = (likedImages, currentImageLink) => {
+        return (
+            likedImages.filter(image => image.imageLink === currentImageLink)
+                .length > 0
+        )
+    }
+
+    console.log(likedImages)
+
     if (searchDataArray.length > 0) {
         return searchDataArray.map((result, index) => {
             const { data, links } = result
@@ -27,20 +36,26 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
                     <br />
                     <img src={imageLink} alt="new" />
                     <br />
-                    <Button
-                        onClick={() => likeImage({ title, dateCreated, imageLink })}
-                        isLikeButton={true}
-                        type="submit"
-                    >
-                        Like
-                    </Button>
-                    <Button
-                        onClick={() => dislikeImage(imageLink)}
-                        isDislikeButton={true}
-                        type="submit"
-                    >
-                        Unlike
-                    </Button>
+
+                    {likedImages && isImageAlreadyLiked(likedImages, imageLink) ? (
+                        <Button
+                            onClick={() => dislikeImage(imageLink)}
+                            isDislikeButton={true}
+                            type="submit"
+                        >
+                            Unlike
+                        </Button>
+                    ) : (
+                        <Button
+                            onClick={() =>
+                                likeImage({ title, dateCreated, imageLink })
+                            }
+                            isLikeButton={true}
+                            type="submit"
+                        >
+                            Like
+                        </Button>
+                    )}
                 </div>
             )
         })
