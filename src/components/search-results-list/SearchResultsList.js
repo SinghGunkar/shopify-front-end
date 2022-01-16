@@ -1,11 +1,21 @@
 import React from "react"
 import { connect, useSelector } from "react-redux"
-import { dislikePhoto, likePhoto } from "../../redux/actions.js/likeDislikeActions"
-import { useFirestoreConnect, isLoaded } from "react-redux-firebase"
+import {
+    dislikePhoto,
+    likePhoto,
+    setIsLoadingState
+} from "../../redux/actions.js/likeDislikeActions"
+import { useFirestoreConnect } from "react-redux-firebase"
 import "./searchResultsList.scss"
 import Button from "../button/Button"
 
-const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
+const SearchDataList = ({
+    searchDataArray,
+    likeImage,
+    dislikeImage,
+    isLikeDislikeStatus,
+    startLoading
+}) => {
     const uid = useSelector(state => state.firebase.auth.uid)
     useFirestoreConnect([{ collection: "users", doc: uid }])
     const likedImages = useSelector(
@@ -18,6 +28,8 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
                 .length > 0
         )
     }
+
+    console.log(isLikeDislikeStatus)
 
     if (searchDataArray.length > 0) {
         return searchDataArray.map((result, index) => {
@@ -37,19 +49,25 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
 
                     {likedImages && isImageAlreadyLiked(likedImages, imageLink) ? (
                         <Button
-                            onClick={() => dislikeImage(imageLink)}
+                            onClick={() => {
+                                startLoading()
+                                dislikeImage(imageLink)
+                            }}
                             isDislikeButton={true}
                             type="submit"
+                            disabled={isLikeDislikeStatus === "loading"}
                         >
                             Unlike
                         </Button>
                     ) : (
                         <Button
-                            onClick={() =>
+                            onClick={() => {
+                                startLoading()
                                 likeImage({ title, dateCreated, imageLink })
-                            }
+                            }}
                             isLikeButton={true}
                             type="submit"
+                            disabled={isLikeDislikeStatus === "loading"}
                         >
                             Like
                         </Button>
@@ -64,14 +82,16 @@ const SearchDataList = ({ searchDataArray, likeImage, dislikeImage }) => {
 
 const mapStateToProps = state => {
     return {
-        likedPhotos: state.likedPhotos
+        likedPhotos: state.likedPhotos,
+        isLikeDislikeStatus: state.likeDislike.status
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
         likeImage: url => dispatch(likePhoto(url)),
-        dislikeImage: url => dispatch(dislikePhoto(url))
+        dislikeImage: url => dispatch(dislikePhoto(url)),
+        startLoading: () => dispatch(setIsLoadingState())
     }
 }
 

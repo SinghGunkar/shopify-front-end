@@ -3,9 +3,12 @@ import { useSelector, connect } from "react-redux"
 import "./likedImages.scss"
 import { useFirestoreConnect, isLoaded } from "react-redux-firebase"
 import Button from "../button/Button"
-import { dislikePhoto } from "../../redux/actions.js/likeDislikeActions"
+import {
+    dislikePhoto,
+    setIsLoadingState
+} from "../../redux/actions.js/likeDislikeActions"
 
-const LikedImages = ({ dislikeImage }) => {
+const LikedImages = ({ dislikeImage, isLikeDislikeStatus, startLoading }) => {
     const uid = useSelector(state => state.firebase.auth.uid)
     useFirestoreConnect([{ collection: "users", doc: uid }])
     const likedImages = useSelector(
@@ -34,9 +37,13 @@ const LikedImages = ({ dislikeImage }) => {
                                 <h4>{`Date created: ${image.dateCreated}`}</h4>
 
                                 <Button
-                                    onClick={() => dislikeImage(image.imageLink)}
+                                    onClick={() => {
+                                        startLoading("loading")
+                                        dislikeImage(image.imageLink)
+                                    }}
                                     isDislikeButton={true}
                                     type="submit"
+                                    disabled={isLikeDislikeStatus === "loading"}
                                 >
                                     UNLIKE
                                 </Button>
@@ -49,10 +56,17 @@ const LikedImages = ({ dislikeImage }) => {
     )
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        dislikeImage: url => dispatch(dislikePhoto(url))
+        isLikeDislikeStatus: state.likeDislike.status
     }
 }
 
-export default connect(null, mapDispatchToProps)(LikedImages)
+const mapDispatchToProps = dispatch => {
+    return {
+        dislikeImage: url => dispatch(dislikePhoto(url)),
+        startLoading: () => dispatch(setIsLoadingState())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(LikedImages)

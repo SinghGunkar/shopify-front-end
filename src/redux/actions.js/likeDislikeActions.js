@@ -53,3 +53,12 @@ export const dislikePhoto = payload => {
             })
     }
 }
+
+export const setIsLoadingState = () => {
+    return (dispatch, getState, { getFirebase, getFirestore }) => {
+        return dispatch({
+            type: "START_DISLIKE_OR_LIKE_PROCESS",
+            payload: "loading"
+        })
+    }
+}
